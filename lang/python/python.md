@@ -12,6 +12,8 @@ Scientific Python Cheatsheet
         - [Operators](#operators)
         - [Control Flow](#control-flow)
         - [Functions, Classes, Generators, Decorators](#functions-classes-generators-decorators)
+    - [Python Utils](#python-utils)
+        - [logger](#logger)
     - [IPython](#ipython)
         - [console](#console)
         - [debugger](#debugger)
@@ -40,6 +42,7 @@ Scientific Python Cheatsheet
     - [Pandas](#pandas-import-pandas-as-pd)
         - [data structures](#data-structures)
         - [DataFrame](#dataframe)
+    - [Python Interview](#python-interview)
 
 <!-- markdown-toc end -->
 
@@ -295,6 +298,36 @@ def my_funct():
     print('func')
 
 my_funct()
+```
+
+## Python Utils
+### logger
+```python
+# Logger initialization
+import logging
+logging.basicConfig(level=logging.INFO)
+# Using __name__ will be easy for log output
+logger = logging.getLogger(__name__)
+
+# create a file handler
+handler = logging.FileHandler('hello.log')
+handler.setLevel(logging.INFO)
+
+# create a logging format
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+
+# add the handlers to the logger
+logger.addHandler(handler)
+
+# Dump the trackback
+try:
+    open('/path/to/does/not/exist', 'rb')
+# except (SystemExit, KeyboardInterrupt):
+    # raise Exception
+except Exception, e:
+    logger.error('Failed to open file', exc_info=True)
+
 ```
 
 ## IPython
@@ -605,3 +638,13 @@ print(df[:2])                      # print first 2 lines of the DataFrame
 raw = df.values                    # get raw data out of DataFrame object
 cols = df.columns                  # get list of columns headers
 ```
+
+
+### Python InterView
+
+####
+* python中，strings, tuples, 和numbers是不可更改的对象，而list,dict等则是可以修改的对象
+####
+* @staticmethod function is nothing more than a function defined inside a class. It is callable without instantiating the class first. It’s definition is immutable via inheritance.
+* @classmethod function also callable without instantiating the class, but its definition follows Sub class, not Parent class, via inheritance. That’s because the first argument for @classmethod function must always be cls (class). 也就是传递过来的参数不同,static不传递默认参数，但是classmethod传递class过来
+*
