@@ -22,19 +22,19 @@
 % Stack继承自Vector，实现一个后进先出的堆栈。Stack提供5个额外的方法使得Vector得以被当作堆栈使用。基本的push和pop方法，还有peek方法得到栈顶的元素，empty方法测试堆栈是否为空，search方法检测一个元素在堆栈中的位置。Stack刚创建后是空栈。
 
 \begin{tabular}{@{}ll@{}}
-\multirow{2}{*}{ArrayList}  & {\tabincell{l}{NTS,List list = Collections.synchronizedList\\(new LinkedList(...))}} \\
-{}                          & {} \\
-\hline
-\multirow{2}{*}{LinkedList} & {\tabincell{l}{NTS,ensureCapacity for Insert large number of\\elements.}} \\
-{}                          & {} \\
-\hline
-\multirow{2}{*}{Vector}     & {\tabincell{l}{TS=>iterator will throw ConcurrentModificatio\\nException When changed by other thread}} \\
-{}                          & {} \\
-\hline
-\multirow{2}{*}{Stack}      & {\tabincell{l}{TS(extends from vector)}} \\
-{}                          & {} \\
-% \verb!letter!  & Letter (?). \\
-% \verb!latex!  & Large sans-serif font.
+    \multirow{2}{*}{ArrayList}  & {\tabincell{l}{NTS,List list = Collections.synchronizedList\\(new LinkedList(...))}} \\
+    {}                          & {} \\
+    \hline
+    \multirow{2}{*}{LinkedList} & {\tabincell{l}{NTS,ensureCapacity for Insert large number of\\elements.}} \\
+    {}                          & {} \\
+    \hline
+    \multirow{2}{*}{Vector}     & {\tabincell{l}{TS=>iterator will throw ConcurrentModificatio\\nException When changed by other thread}} \\
+    {}                          & {} \\
+    \hline
+    \multirow{2}{*}{Stack}      & {\tabincell{l}{TS(extends from vector)}} \\
+    {}                          & {} \\
+    % \verb!letter!  & Letter (?). \\
+    % \verb!latex!  & Large sans-serif font.
 \end{tabular}
 
 \subsection{Iterator}
@@ -46,7 +46,7 @@
 \begin{itemize}
     \item{Arrays.sort() to sort a array, Collection.sort() to sort a arraylist}
     \item{class Fubar implements Comparable<Fubar>, then use Arrays.sort}
-    \item{\begin{lstlisting}[ language=Java]
+    \item{\begin{lstlisting}[language=Java]
 class Fruit implements Comparable<Fruit>{
     public static Comparator<Fubar> FNComparator = new Comparator<Fubar>()
     {

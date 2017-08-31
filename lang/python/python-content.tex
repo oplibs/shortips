@@ -1,65 +1,169 @@
-\begin{center}
-     \Large{\textbf{Java Cheat Sheet}} \\
-\end{center}
+% \begin{center}
+     % \Large{\textbf{Java Cheat Sheet}} \\
+% \end{center}
 
-\section{Collection}
-\subsection{List}
+\section{Pure Python}
+\subsection{Types \& Transform}
 
-% LinkedList类
-
-% LinkedList实现了List接口，允许null元素。此外LinkedList提供额外的get，remove，insert方法在LinkedList的首部或尾部。这些操作使LinkedList可被用作堆栈（stack），队列（queue）或双向队列（deque）。注意LinkedList没有同步方法。如果多个线程同时访问一个List，则必须自己实现访问同步。一种解决方法是在创建List时构造一个同步的List：List list = Collections.synchronizedList(new LinkedList(...));
-
-% ArrayList类
-
-% ArrayList实现了可变大小的数组。它允许所有元素，包括null。ArrayList没有同步。size，isEmpty，get，set方法运行时间为常数。但是add方法开销为分摊的常数，添加n个元素需要O(n)的时间。其他的方法运行时间为线性。每个ArrayList实例都有一个容量（Capacity），即用于存储元素的数组的大小。这个容量可随着不断添加新元素而自动增加，但是增长算法并没有定义。当需要插入大量元素时，在插入前可以调用ensureCapacity方法来增加ArrayList的容量以提高插入效率。和LinkedList一样，ArrayList也是非同步的（unsynchronized）。
-
-% Vector类
-
-% Vector非常类似ArrayList，但是Vector是同步的。由Vector创建的Iterator，虽然和ArrayList创建的Iterator是同一接口，但是，因为Vector是同步的，当一个Iterator被创建而且正在被使用，另一个线程改变了Vector的状态（例如，添加或删除了一些元素），这时调用Iterator的方法时将抛出ConcurrentModificationException，因此必须捕获该异常。
-
-% Stack 类
-
-% Stack继承自Vector，实现一个后进先出的堆栈。Stack提供5个额外的方法使得Vector得以被当作堆栈使用。基本的push和pop方法，还有peek方法得到栈顶的元素，empty方法测试堆栈是否为空，search方法检测一个元素在堆栈中的位置。Stack刚创建后是空栈。
-
-\begin{tabular}{@{}ll@{}}
-\multirow{2}{*}{ArrayList}  & {\tabincell{l}{NTS,List list = Collections.synchronizedList\\(new LinkedList(...))}} \\
-{}                          & {} \\
-\hline
-\multirow{2}{*}{LinkedList} & {\tabincell{l}{NTS,ensureCapacity for Insert large number of\\elements.}} \\
-{}                          & {} \\
-\hline
-\multirow{2}{*}{Vector}     & {\tabincell{l}{TS=>iterator will throw ConcurrentModificatio\\nException When changed by other thread}} \\
-{}                          & {} \\
-\hline
-\multirow{2}{*}{Stack}      & {\tabincell{l}{TS(extends from vector)}} \\
-{}                          & {} \\
-% \verb!letter!  & Letter (?). \\
-% \verb!latex!  & Large sans-serif font.
+\begin{tabular}{@{}l|l@{}}
+    \multirow{3}{*}{Basic Types} & {8.3e5, int(x, [,base]), long(x, [,base]), hex(), oct()} \\
+    {}                           & {'word'} \\
+    {}                           & {1.5+0.5j, complex(real[,imag])} \\
+    \hline
+    \multirow{2}{*}{To Number}   & {float(x)} \\
+    {}                           & {ord(c)\{char to integer\}} \\
+    \hline
+    {To String}                  & {chr(x), unichar(x), str(x), repr(x)\{Object\}} \\
+    \hline
+    {Object}                     & {tuple(s), list(s), eval(str)\{run\}} \\
+    \hline
+    {Type}                       & {type(x), type('') is str} \\
+    \hline
+    {unchangable}                & {string, tuples,numbers} \\
+    {changable}                  & {list, dict} \\
+    % \verb!letter!              & Letter (?). \\
+    % \verb!latex!             & Large sans-serif font.
 \end{tabular}
+    % \item{eval(str)              # 用来计算在字符串中的有效Python表达式,并返回一个对象}
+    % \item{tuple(s)               # 将序列 s 转换为一个元组}
+    % \item{list(s)                # 将序列 s 转换为一个列表}
 
-\subsection{Iterator}
+\subsection{String}
+
+\command{str.strip().lstrip().rstrip(\',\')}{}
+\command{cmp(sStr1,sStr2)                }{compare}
+\command{str.index(str2)                 }{Search str2, Exception when failed}
+\command{sStr1.find(sStr2)               }{-1: Not found}
+\command{len(str)                        }{}
+\command{S.lower()                       }{}
+\command{S.upper()                       }{}
+\command{S.swapcase()                    }{}
+\command{S.capitalize()                  }{Upper the first char}
+\command{[::-1]                          }{reverse}
+
+\subsection{list}
+
+\command{b = list(range(5))                                      }{Initialize from iteratable }
+\command{ret=[0] * (length+1)                                    }{}
+\command{c=[nu**2 for nu in b]                                   }{ list comprehension}
+\command{d=[nu**2 for nu in b if nu < 3]                         }{ conditioned list comprehension}
+\command{h=['re', 'bl'] + ['gr']                                 }{ list concatenation}
+\command{}{}
+\command{sorted([3, 2, 1])                                       }{}
+\command{list.index(var)                                         }{ Search var, exception when failed}
+\command{list.append(var)                                        }{}
+\command{list.pop(idx)                                           }{}
+\command{list.insert(idx,var)                                    }{}
+\command{list.remove(var)                                        }{ remove the first var}
+\command{list.count(var)                                         }{ count number for a var}
+\command{list.extend(list)                                       }{ merge two lists}
+\command{list.sort()                                             }{}
+\command{list.reverse()                                          }{}
+\command{a[start:to]                                             }{}
+% multilist = [[0 for col in range(5)] for row in range(3)] }&{ 二维数组
+\command{del L[1]                                                }{ Remove with index}
+\command{del L[1:3]                                              }{ Remove with index range}
+
+\subsection{Set}
+\command{x = set('spam')     }{ y = set(['s','p','a','m'])}
+\command{s = set([3,5,9,10]) }{}
+\command{t = set("Hello")    }{}
+\command{t.add(item)         }{}
+\command{t.remove(item)      }{Exception when not exist}
+\command{t.discard(item)     }{No exception}
+\command{t.pop()             }{pop random on, exception when null}
+\command{s.clear()           }{ }
+\command{t.update([])        }{add multi itemi}
+\command{$a = t|s$           }{t + s}
+\command{$b = t\&s$          }{common for t \& s}
+% {$c = t–s$           }&{difference}\\
+% {$d = t^s$           }&{Those exists only once}\\
+
+\subsection{Dictionary}
+
+\command{a = \{'red': 'rouge', 'blue': 'bleu'\}}{}
+\command{c = [value for key, value in a.items()]}{loop through contents}
+\command{for k in dict:  for (k, v) in dict.items():}{}
+\command{for k, v in dict.iteritems():}{}
+\command{d = a.get('yellow', 'no translation found')}{}
+\command{a.setdefault('extra', []).append('cyan')}{init key with default}
+\command{del(dict["a"]}{}
+\command{dict.pop("b")}{}
+\command{if "key1" in D:}{}
+
+\subsection{Math}
+
+\command{3 // 2}{integer division}
+\command{3 ** 2}{exponent}
+\command{sys.maxint}{max int in py2.0}
+\command{sys.maxsize}{max int in py3.0}
+\command{max(a, b)}{}
+\command{min(a, b)}{}
+\command{math.sqrt}{}
+
+\subsection{Class}
+
+\subsubsection{Functions}
+
+\lstset{language=Python}
+\begin{lstlisting}[language=Python]
+class Point(object):
+    def __init__(self, x):
+        self.x = x
+    def __call__(self):
+        print(self.x)
+    #Object print
+    def __repr__(self):
+        return '{}: {} {}'.format(self.__class__.__name__,self.name,self.number)
+    #Comparator
+    def __cmp__(self, other):
+        if hasattr(other, 'getKey'):
+            return self.getKey().__cmp__(other.getKey())
+\end{lstlisting}
+
+\subsubsection{Decorator}
+\begin{lstlisting}[language=Python]
+# Decorator can be used to modify
+# the behaviour of a function
+class myDecorator(object):
+    def __init__(self, f):
+        self.f = f
+    def __call__(self):
+        print("call")
+        self.f()
+
+@myDecorator
+def my_funct():
+    print('func')
+\end{lstlisting}
 
 
-\subsection{Comparable}
-\textit{Interface:} java.lang.Comparable:public int compareTo(Object obj)；
+\subsubsection{Exception}
+\begin{lstlisting}[language=Python]
+try:
+    open('/path/to/does/not/exist', 'rb')
+# except (SystemExit, KeyboardInterrupt):
+    # raise Exception
+except Exception, e:
+    logger.error('Failed to open file', exc_info=True)
+\end{lstlisting}
+% To make this come out properly in landscape mode, do one of the following
+% 1.
+%  pdflatex latexsheet.tex
+%
+% 2.
+%  latex latexsheet.tex
+%  dvips -P pdf  -t landscape latexsheet.dvi
+%  ps2pdf latexsheet.ps
 
-\begin{itemize}
-    \item{Arrays.sort() to sort a array, Collection.sort() to sort a arraylist}
-    \item{class Fubar implements Comparable<Fubar>, then use Arrays.sort}
-    \item{\begin{lstlisting}[ language=Java]
-class Fruit implements Comparable<Fruit>{
-    public static Comparator<Fubar> FNComparator = new Comparator<Fubar>()
-    {
-        public int compare(Fruit fruit1, Fruit fruit2) {
-        ....
-        }
-    }
-}
-Arrays.sort(fruits, Fruit.FNComparator);
-          \end{lstlisting}
-    }
-\end{itemize}
-% Used at the very beginning of a document:
+
+% If you're reading this, be prepared for confusion.  Making this was
+% a learning experience for me, and it shows.  Much of the placement
+% was hacked in; if you make it better, let me know...
+
+
+% 2008-04
+% Changed page margin code to use the geometry package. Also added code for
 % \verb!\documentclass{!\textit{class}\verb!}!.  Use
 % \verb!\begin{document}! to start contents and \verb!\end{document}! to
 % end the document.
