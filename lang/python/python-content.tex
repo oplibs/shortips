@@ -6,21 +6,24 @@
 \subsection{Types \& Transform}
 
 \begin{tabular}{@{}l|l@{}}
-    \multirow{3}{*}{Basic Types} & {8.3e5, int(x, [,base]), long(x, [,base]), hex(), oct()} \\
-    {}                           & {'word'} \\
-    {}                           & {1.5+0.5j, complex(real[,imag])} \\
+    \multirow{3}{*}{Basic Types}  & {8.3e5, int(x[,base]), long(x[,base]), hex(), oct()} \\
+    {}                            & {'word'} \\
+    {}                            & {1.5+0.5j, complex(real[,imag])} \\
     \hline
-    \multirow{2}{*}{To Number}   & {float(x)} \\
-    {}                           & {ord(c)\{char to integer\}} \\
+    \multirow{2}{*}{To Number}    & {float(x)} \\
+    {}                            & {ord(c)\{char to integer\}} \\
     \hline
-    {To String}                  & {chr(x), unichar(x), str(x), repr(x)\{Object\}} \\
+    {To String}                   & {chr(x), unichar(x), str(x), repr(x)\{Object\}} \\
     \hline
-    {Object}                     & {tuple(s), list(s), eval(str)\{run\}} \\
+    {Object}                      & {tuple(s), list(s), eval(str)\{run\}} \\
     \hline
-    {Type}                       & {type(x), type('') is str} \\
+    {Type}                        & {type(x), type('') is str} \\
     \hline
-    {unchangable}                & {string, tuples,numbers} \\
-    {changable}                  & {list, dict} \\
+    {unchangable}                 & {string, tuples,numbers} \\
+    {changable}                   & {list, dict} \\
+    \hline
+    \multirow{2}{*}{common utils} & {type(),dir(),getattr(),hasattr(),isinstance()}\\
+    {}                            & {id()}\\
     % \verb!letter!              & Letter (?). \\
     % \verb!latex!             & Large sans-serif font.
 \end{tabular}
@@ -91,6 +94,35 @@
 \command{dict.pop("b")}{}
 \command{if "key1" in D:}{}
 
+\subsection{Sort}
+\begin{lstlisting}[language=Python]
+def cmp(e0, e1):
+    if e0<e1:
+        return 1
+    elif e0>e1:
+        return -1
+    else:
+        return 0
+data = [1, 3, -1, 100, -50]
+data.sort(cmp)
+# or
+sorted(data, cmp=None, key=lambda x: x.modified, reverse=False)
+# or
+import operator
+x = {1: 2, 3: 4, 4: 3, 2: 1, 0: 0}
+sorted_x = sorted(x.items(), key=operator.itemgetter(1))
+\end{lstlisting}
+
+\subsection{heapq}
+\command{heapq.heapify(list)}{Make a heap}
+\command{htapq.heappush(h, item)}{Add an item}
+\command{htapq.heappop(h)}{Pop an item}
+\command{htapq.heappushpop(h, item)}{Push then pop}
+\command{htapq.heapreplace(h, item)}{Pop then push}
+\command{htapq.nlargest(n, heap)}{}
+\command{htapq.nsmallest(n, heap)}{}
+\command{htapq->(key, data)}{Use key as comparator}
+
 \subsection{Math}
 
 \command{3 // 2}{integer division}
@@ -110,12 +142,18 @@
 class Point(object):
     def __init__(self, x):
         self.x = x
+
+    def __del__(self):
+    pass
+
     def __call__(self):
         print(self.x)
-    #Object print
+
+        #Object print
     def __repr__(self):
         return '{}: {} {}'.format(self.__class__.__name__,self.name,self.number)
-    #Comparator
+
+        #Comparator
     def __cmp__(self, other):
         if hasattr(other, 'getKey'):
             return self.getKey().__cmp__(other.getKey())
@@ -147,6 +185,8 @@ try:
 except Exception, e:
     logger.error('Failed to open file', exc_info=True)
 \end{lstlisting}
+
+
 % To make this come out properly in landscape mode, do one of the following
 % 1.
 %  pdflatex latexsheet.tex
@@ -780,23 +820,6 @@ except Exception, e:
 % \subsection{subsection}
 % text \emph{emphasized text} text. \cite{WC:1953}
 % discovered the structure of DNA.
-
-% A table:
-% \begin{table}[!th]
-% \begin{tabular}{|l|c|r|}
-% \hline
-% first  &  row  &  data \\
-% second &  row  &  data \\
-% \hline
-% \end{tabular}
-% \caption{This is the caption}
-% \label{ex:table}
-% \end{table}
-
-% The table is numbered \ref{ex:table}.
-% \end{document}
-% \end{verbatim}
-
 
 
 % \rule{0.3\linewidth}{0.25pt}
