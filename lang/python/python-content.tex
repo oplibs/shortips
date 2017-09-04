@@ -37,10 +37,7 @@
 \command{cmp(sStr1,sStr2)                }{compare}
 \command{str.index(str2)                 }{Search str2, Exception when failed}
 \command{sStr1.find(sStr2)               }{-1: Not found}
-\command{len(str)                        }{}
-\command{S.lower()                       }{}
-\command{S.upper()                       }{}
-\command{S.swapcase()                    }{}
+\command{S.lower(),S.upper(),S.swapcase()}{}
 \command{S.capitalize()                  }{Upper the first char}
 \command{[::-1]                          }{reverse}
 
@@ -135,8 +132,6 @@ sorted_x = sorted(x.items(), key=operator.itemgetter(1))
 
 \subsection{Class}
 
-\subsubsection{Functions}
-
 \lstset{language=Python}
 \begin{lstlisting}[language=Python]
 class Point(object):
@@ -144,14 +139,14 @@ class Point(object):
         self.x = x
 
     def __del__(self):
-    pass
+        close();
 
     def __call__(self):
         print(self.x)
 
         #Object print
     def __repr__(self):
-        return '{}: {} {}'.format(self.__class__.__name__,self.name,self.number)
+        return 'str to display'
 
         #Comparator
     def __cmp__(self, other):
@@ -161,15 +156,12 @@ class Point(object):
 
 \subsubsection{Decorator}
 \begin{lstlisting}[language=Python]
-# Decorator can be used to modify
-# the behaviour of a function
 class myDecorator(object):
     def __init__(self, f):
         self.f = f
     def __call__(self):
         print("call")
         self.f()
-
 @myDecorator
 def my_funct():
     print('func')
@@ -183,7 +175,11 @@ try:
 # except (SystemExit, KeyboardInterrupt):
     # raise Exception
 except Exception, e:
-    logger.error('Failed to open file', exc_info=True)
+    logger.error('Failed to open', exc_info=True)
+else:
+    logger.info('open', exc_info=True)
+finally:
+    close();
 \end{lstlisting}
 
 \subsubsection{With}
@@ -191,21 +187,17 @@ except Exception, e:
 # auto close when finish following indent
 with open(filename, 'a') as f:
     f.write("")
-
-    '''
-class OpenContext(object):
-    def __init__(self, filename, mode):
-    self.fp=open(filename, mode);
-
-    def __enter(self):
-    return self.fp
-
-    def __exit__(self, exec_type, exc_val, exc_tb):
-    self.fp.close();
-
-    with OpenConetxt(filename) as f:
-    f.write('hello');
-    '''
+    # or
+with WithClass() as f:
+    f. xxxx
+    # WithClass need __enter__ and __exit__
+    # or
+from contextlib import contextmanager
+@contextmanager
+def my_open(path, mode):
+    f = open(path, mode)
+    yield f
+    f.close()
 \end{lstlisting}
 
 % To make this come out properly in landscape mode, do one of the following

@@ -24,10 +24,12 @@ class Sol003(object):
                 while start<end:
                     startc=s[start]
                     start=start+1;
-                    del charDict[startc]
+                    if startc in charDict:
+                        del(charDict[startc]);
                     if startc==curc:
                         break;
             else:
                 charDict[curc] = 0;
+        print start,end
         res = max(end-start, res)
         return res
