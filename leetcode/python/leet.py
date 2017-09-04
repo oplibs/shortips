@@ -27,7 +27,7 @@ if __name__!="main":
         print "quit"
     else:
         classname = 'Sol'+action
-        filename = './tests/leet'+action
+        filename = '../tests/leet'+action
         algo = eval(classname)()
         sol = Solution();
         sol.runAllCases(filename, algo);

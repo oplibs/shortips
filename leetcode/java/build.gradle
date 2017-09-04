@@ -1,0 +1,27 @@
+group 'cn.mzen'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.glassfish', name: 'javax.json', version: '1.1'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.2'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+task runLeet(type: JavaExec) {
+    if ( project.hasProperty("args") ) {
+        args = [project.property("args")]
+        println args
+    }
+    main = 'cn.mzen.algotips.Main'
+    classpath = sourceSets.main.runtimeClasspath
+}
