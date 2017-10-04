@@ -1,0 +1,50 @@
+\begin{center}
+     \Large{\textbf{Golang Cheat Sheet}} \\
+\end{center}
+
+\section{Collection}
+\subsection{List}
+
+
+\begin{tabular}{@{}ll@{}}
+    \multirow{2}{*}{ArrayList}  & {\tabincell{l}{NTS,List list = Collections.synchronizedList\\(new LinkedList(...))}} \\
+    {}                          & {} \\
+    \hline
+    \multirow{2}{*}{LinkedList} & {\tabincell{l}{NTS,ensureCapacity for Insert large number of\\elements.}} \\
+    {}                          & {} \\
+    \hline
+    \multirow{2}{*}{Vector}     & {\tabincell{l}{TS=>iterator will throw ConcurrentModificatio\\nException When changed by other thread}} \\
+    {}                          & {} \\
+    \hline
+    \multirow{2}{*}{Stack}      & {\tabincell{l}{TS(extends from vector)}} \\
+    {}                          & {} \\
+    % \verb!letter!  & Letter (?). \\
+    % \verb!latex!  & Large sans-serif font.
+\end{tabular}
+
+\subsection{Iterator}
+
+
+\subsection{Comparable}
+\textit{Interface:} java.lang.Comparable:public int compareTo(Object obj)；
+
+\begin{itemize}
+    \item{Arrays.sort() to sort a array, Collection.sort() to sort a arraylist}
+    \item{class Fubar implements Comparable<Fubar>, then use Arrays.sort}
+    \item{\begin{lstlisting}[language=Java]
+class Fruit implements Comparable<Fruit>{
+    public static Comparator<Fubar> FNComparator = new Comparator<Fubar>()
+    {
+        public int compare(Fruit fruit1, Fruit fruit2) {
+        ....
+        }
+    }
+}
+Arrays.sort(fruits, Fruit.FNComparator);
+          \end{lstlisting}
+    }
+\end{itemize}
+
+\subsection{PriorityQueue}
+\command{add(),remove(),element()}{fail->exception}
+\command{offer(),poll(),peek()}{Fail->return null}
