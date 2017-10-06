@@ -24,12 +24,12 @@ d.getDoubleOf(4); // is 8
 
 \subsection{sort sort(list, comparator)}
 \begin{itemize}
-\item{list.sort((a, b) -> a.length() - b.length())}
-\item{list.sort(Comparator.comparing(n $->$ n.length()));}
+\item{list.sort((a, b)$->$a.length() - b.length())}
+\item{list.sort(Comparator.comparing(n$->$n.length()));}
 \item{list.sort(Comparator.comparing(String::length));}
 \end{itemize}
 
-\subsection{list.\textbf{removeIf}(w $->$ w.length() < 6);}
+\subsection{list.\textbf{removeIf}(w$->$w.length()$<$6);}
 % //> [Darwin, Galilei, Einstein, Newton]
 
 \subsection{merge merge(key, value, remappingFunction)}
@@ -37,125 +37,96 @@ d.getDoubleOf(4); // is 8
 \begin{lstlisting}[language=Java]
 Map<String, String> names = new HashMap<>();
 names.put("Albert", "Ein?");
-names.put("Marie", "Curie");
-names.put("Max", "Plank");
-
-// Value "Albert" exists
-// {Marie=Curie, Max=Plank, Albert=Einstein}
+// "Albert" exists {Albert=Einstein}
 names.merge("Albert", "stein", (old, val) -> old.substring(0, 3) + val);
-
-// Value "Newname" don't exists
-// {Marie=Curie, Newname=stein, Max=Plank, Albert=Einstein}
+// not exists{Newname=stein, Albert=Einstein}
 names.merge("Newname", "stein", (old, val) -> old.substring(0, 3) + val);
 \end{lstlisting}
 
-\section{Method Expressions Class::staticMethod}
+\section{Class::staticMethod}
 
 Allows to reference methods (and constructors) without executing them
 
-\begin{lstlisting}[language=Java]
-getPrimes(numbers, a -> StaticMethod.isPrime(a));
-// Lambda Form:
-// Method Reference:
-getPrimes(numbers, StaticMethod::isPrime);
-Method Reference	Lambda Form
-StaticMethod::isPrime	n -> StaticMethod.isPrime(n)
-String::toUpperCase	(String w) -> w.toUpperCase()
-String::compareTo	(String s, String t) -> s.compareTo(t)
-System.out::println	x -> System.out.println(x)
-Double::new	n -> new Double(n)
-String[]::new	(int n) -> new String[n]
-\end{lstlisting}
+\begin{tabular}{@{}l|l@{}}
+    \hline
+    {Method Reference}     & {Lambda Form} \\
+    \hline
+    {StaticMethod.isPrime} & {n$->$StaticMethond.isPrime(n)} \\
+    \hline
+    {String::toUpperCase}  & {(String w)$->$w.toUpperCase()} \\
+    \hline
+    {String::compareTo}    & {(String s, String t)$->$s.compareTo(t)}\\
+    \hline
+    {System.out::println}  & {x$->$System.out.println(x)}\\
+    \hline
+    {Double::new}          & {n$->$new Double(n)}\\
+    \hline
+    {String[]::new}        & {(int n)$->$new String[n]}\\
+    \hline
+\end{tabular}
 
-Streams
+\section{Streams}
 
 Similar to collections, but
+\begin{enumerate}
+        \item{They don't store their own data}
+        \item{Data comes from elsewhere (collection, file, db, web, ...)}
+        \item{immutable (produce new streams)}
+        \item{lazy (only computes what is necessary !)}
+\end{enumerate}
 
-They don't store their own data
-The data comes from elsewhere (collection, file, db, web, ...)
-immutable (produce new streams)
-lazy (only computes what is necessary !)
-// Will compute just 3 "filter"
+\begin{lstlisting}[language=Java]
 Stream<String> longNames = list
-   .filter(n -> n.length() > 8)
-   .limit(3);
-Create a new stream
+   .filter(n -> n.length() > 8).limit(3);
+\end{lstlisting}
 
-Stream<Integer> stream = Stream.of(1, 2, 3, 5, 7, 11);
-Stream<String> stream = Stream.of("Jazz", "Blues", "Rock");
-Stream<String> stream = Stream.of(myArray); // or from an array
-list.stream(); // or from a list
+\textbf{Creation}
+\begin{lstlisting}[language=Java]
+Stream<Integer> stream = Stream.of(1, 2, 3, 5);
+Stream<String> stream = Stream.of("a", "b");
+Stream<String> stream = Stream.of(arr); // array
+list.stream(); //list
+Stream<Integer> integers = Stream.iterate(0, n -> n + 1);// Infinit stream [0; inf[
+\end{lstlisting}
 
-// Infinit stream [0; inf[
-Stream<Integer> integers = Stream.iterate(0, n -> n + 1);
-Collecting results
+\textbf{Collecting results}
 
+\begin{lstlisting}[language=Java]
 // Collect into an array (::new is the constructor reference)
 String[] myArray = stream.toArray(String[]::new);
-
 // Collect into a List or Set
 List<String> myList = stream.collect(Collectors.toList());
 Set<String> mySet = stream.collect(Collectors.toSet());
-
 // Collect into a String
 String str = list.collect(Collectors.joining(", "));
-map map(mapper)
-Applying a function to each element
+\end{lstlisting}
 
-// Apply "toLowerCase" for each element
+\textbf{map filter reduce, limit, skip}
+\begin{lstlisting}[language=Java]
 res = stream.map(w -> w.toLowerCase());
 res = stream.map(String::toLowerCase);
-//> bohr darwin galilei tesla einstein newton
-
 res = Stream.of(1,2,3,4,5).map(x -> x + 1);
-//> 2 3 4 5 6
-filter filter(predicate)
-Retains elements that match the predicate
-
-// Filter elements that begin with "E"
+//filter:Retains elements that match
 res = stream.filter(n -> n.substring(0, 1).equals("E"));
-//> Einstein
-
 res = Stream.of(1,2,3,4,5).filter(x -> x < 3);
-//> 1 2
-reduce
-Reduce the elements to a single value
-
-String reduced = stream
-	.reduce("", (acc, el) -> acc + "|" + el);
-//> |Bohr|Darwin|Galilei|Tesla|Einstein|Newton
+//Reduce the elements to a single value
+String reduced = stream.reduce("", (acc, el) -> acc + "|" + el);
 limit limit(maxSize) The n first elements
+stream.skip(n) //Discarding the first n elements
+stream.distinct() //Remove duplicated elemetns
+stream.sorted(); //Must be comparable
 
-res = stream.limit(3);
-//> Bohr Darwin Galilei
-skip Discarding the first n elements
-
-res = strem.skip(2); // skip Bohr and Darwin
-//> Galilei Tesla Einstein Newton
-distinct Remove duplicated elemetns
-
-res = Stream.of(1,0,0,1,0,1).distinct();
-//> 1 0
-sorted Sort elements (must be Comparable)
-
-res = stream.sorted();
-//> Bohr Darwin Einstein Galilei Newton Tesla
-allMatch
-
-// Check if there is a "e" in each elements
+//return boolean
 boolean res = words.allMatch(n -> n.contains("e"));
-anyMatch: Check if there is a "e" in an element
-noneMatch: Check if there is no "e" in elements
-
+//anyMatch: Check if there is a "e" in an element
+//noneMatch: Check if there is no "e" in elements
+\end{lstlisting}
 parallel Returns an equivalent stream that is parallel
 
 findAny faster than findFirst on parallel streams
 
-Primitive-Type Streams
-
-Wrappers (like Stream) are inefficients. It requires a lot of unboxing and boxing for each element. Better to use IntStream, DoubleStream, etc.
-
-Creation
+\subsection{Primitive-Type Streams}
+Wrappers (like Stream) are inefficients for unboxing and boxing. Better to use IntStream, DoubleStream, etc.
 
 IntStream stream = IntStream.of(1, 2, 3, 5, 7);
 stream = IntStream.of(myArray); // from an array
