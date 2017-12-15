@@ -22,7 +22,7 @@ public class Sol003 extends Solution{
     }
 
     public void processCase(String data) {
-
+        System.out.println("here!");
     }
 
     private void execute(int[] nums, int target){

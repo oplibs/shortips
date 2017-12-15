@@ -20,19 +20,6 @@ public class CollectionReference {
 
     private void refList(){
         // List 可以类型混用
-        /*
-Collection
-├List
-│├LinkedList
-│├ArrayList
-│└Vector
-│　└Stack
-└Set
-Map
-├Hashtable
-├HashMap
-└WeakHashMap
-*/
         List list = new ArrayList();
         list.add(1);
         list.add('2');
@@ -42,7 +29,6 @@ Map
         // Vector 可以类型混用
         Vector<Integer> vec = new Vector<Integer>();
         vec.add(1);
-        vec.add('1');
     }
 
     private void refListMT(){
