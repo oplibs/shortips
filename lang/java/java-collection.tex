@@ -2,36 +2,7 @@
      \Large{\textbf{Java Cheat Sheet}} \\
 \end{center}
 
-\section{Collection}
-\subsection{List}
-
-% LinkedList类
-
-% LinkedList实现了List接口，允许null元素。此外LinkedList提供额外的get，remove，insert方法在LinkedList的首部或尾部。这些操作使LinkedList可被用作堆栈（stack），队列（queue）或双向队列（deque）。注意LinkedList没有同步方法。如果多个线程同时访问一个List，则必须自己实现访问同步。一种解决方法是在创建List时构造一个同步的List：List list = Collections.synchronizedList(new LinkedList(...));
-
-% ArrayList类
-
-% ArrayList实现了可变大小的数组。它允许所有元素，包括null。ArrayList没有同步。size，isEmpty，get，set方法运行时间为常数。但是add方法开销为分摊的常数，添加n个元素需要O(n)的时间。其他的方法运行时间为线性。每个ArrayList实例都有一个容量（Capacity），即用于存储元素的数组的大小。这个容量可随着不断添加新元素而自动增加，但是增长算法并没有定义。当需要插入大量元素时，在插入前可以调用ensureCapacity方法来增加ArrayList的容量以提高插入效率。和LinkedList一样，ArrayList也是非同步的（unsynchronized）。
-
-% Vector类
-
-% Vector非常类似ArrayList，但是Vector是同步的。由Vector创建的Iterator，虽然和ArrayList创建的Iterator是同一接口，但是，因为Vector是同步的，当一个Iterator被创建而且正在被使用，另一个线程改变了Vector的状态（例如，添加或删除了一些元素），这时调用Iterator的方法时将抛出ConcurrentModificationException，因此必须捕获该异常。
-
-% Stack 类
-
-% Stack继承自Vector，实现一个后进先出的堆栈。Stack提供5个额外的方法使得Vector得以被当作堆栈使用。基本的push和pop方法，还有peek方法得到栈顶的元素，empty方法测试堆栈是否为空，search方法检测一个元素在堆栈中的位置。Stack刚创建后是空栈。
-
-\begin{tabular}{@{}ll@{}}
-    {ArrayList}  & {\tabincell{l}{NTS,List list = Collections.synchronizedList\\(new LinkedList(...))}} \\
-    \hline
-    {LinkedList} & {\tabincell{l}{NTS,ensureCapacity for Insert large number of\\elements.}} \\
-    \hline
-    {Vector}     & {\tabincell{l}{TS=>iterator will throw ConcurrentModificatio\\nException When changed by other thread}} \\
-    \hline
-    {Stack}      & {\tabincell{l}{TS(extends from vector)}} \\
-    % \verb!letter!  & Letter (?). \\
-    % \verb!latex!  & Large sans-serif font.
-\end{tabular}
+\section{Common}
 
 \subsection{Iterator}
 \command{for(ClassA item: ClassAArray)\{\}}{foreach}
@@ -58,10 +29,156 @@ Arrays.sort(fruits, Fruit.FNComparator);
     }
 \end{itemize}
 
+\section{String}
+\begin{lstlisting}[language=Java]
+char data[] = {'a', 'b', 'c'};
+String str = new String(data);
+\end{lstlisting}
+\command{}{charAt(), codePointAt(), code}PointCount(begin, end)}
+\command{}{compareTo(),compareToIgnoreCase(), equalsIgnoreCase()}
+\command{}{isEmpty(), length(), replace(oldchar,newchar), replace(target, replacement)}
+
+
+\section{Collection}
+\subsection{List}
+
+% LinkedList类
+
+% LinkedList实现了List接口，允许null元素。此外LinkedList提供额外的get，remove，insert方法在LinkedList的首部或尾部。这些操作使LinkedList可被用作堆栈（stack），队列（queue）或双向队列（deque）。注意LinkedList没有同步方法。如果多个线程同时访问一个List，则必须自己实现访问同步。一种解决方法是在创建List时构造一个同步的List：List list = Collections.synchronizedList(new LinkedList(...));
+
+% ArrayList类
+
+% ArrayList实现了可变大小的数组。它允许所有元素，包括null。ArrayList没有同步。size，isEmpty，get，set方法运行时间为常数。但是add方法开销为分摊的常数，添加n个元素需要O(n)的时间。其他的方法运行时间为线性。每个ArrayList实例都有一个容量（Capacity），即用于存储元素的数组的大小。这个容量可随着不断添加新元素而自动增加，但是增长算法并没有定义。当需要插入大量元素时，在插入前可以调用ensureCapacity方法来增加ArrayList的容量以提高插入效率。和LinkedList一样，ArrayList也是非同步的（unsynchronized）。
+
+% Vector类
+
+% Vector非常类似ArrayList，但是Vector是同步的。由Vector创建的Iterator，虽然和ArrayList创建的Iterator是同一接口，但是，因为Vector是同步的，当一个Iterator被创建而且正在被使用，另一个线程改变了Vector的状态（例如，添加或删除了一些元素），这时调用Iterator的方法时将抛出ConcurrentModificationException，因此必须捕获该异常。
+
+% Stack 类
+
+% Stack继承自Vector，实现一个后进先出的堆栈。Stack提供5个额外的方法使得Vector得以被当作堆栈使用。基本的push和pop方法，还有peek方法得到栈顶的元素，empty方法测试堆栈是否为空，search方法检测一个元素在堆栈中的位置。Stack刚创建后是空栈。
+
+\begin{tabular}{@{}ll@{}}
+    {ArrayList}  & {\tabincell{l}{NTS,List list = Collections.synchronizedList\\(new LinkedList(...))\\use 0.5 to extend capacity}} \\
+    \hline
+    {LinkedList} & {\tabincell{l}{NTS,ensureCapacity for Insert large number of\\elements.}} \\
+    \hline
+    {Vector}     & {\tabincell{l}{TS=>iterator will throw ConcurrentModificatio\\Exception When changed by other thread\\Use 2 as the load factor.}} \\
+    \hline
+    {Stack}      & {\tabincell{l}{TS(extends from vector)}} \\
+    % \verb!letter!  & Letter (?). \\
+    % \verb!latex!  & Large sans-serif font.
+\end{tabular}
+
+\subsection{ArrayList}
+\command{}{add(\textit{idx}, ele), addAll(\textit{idx}, arr), size()}
+\command{}{remove(idx), remove(ele), removeAll(Collection), removeRange(from, to)}
+\command{}{clear(),clone(),ensureCapacity(size)}
+\command{}{contains(),isEmpty(),indexOf(),lastIndexOf()}
+
+\subsection{LinkedList}
+\command{insert}{offer() tail, offerFirst() head, offerLast() end}
+\command{retrieval}{peek() tail, peekFirst() head, peekLast() end}
+\command{retrieval and  remove}{poll() tail, pollFirst() head, pollLast() end}
+
+\command{stack}{push(),pop(),remove()}
+\command{replace}{set(idx, ele)}
+
+\command{}{add(\textit{idx}, ele), addAll(\textit{idx}, arr), size()}
+\command{}{remove(idx), remove(ele), removeAll(Collection), removeRange(from, to)}
+\command{}{clear(),clone(),ensureCapacity(size)}
+\command{}{contains(),isEmpty(),indexOf(),lastIndexOf()}
+
 \subsection{PriorityQueue}
 \command{add(),remove(),element()}{fail->exception}
-\command{offer(),poll(),peek()}{Fail->return null}
+\command{offer(),poll(),peek()}{insert, remove, retrieval:Fail->return null}
+\command{}{add-offer,element-peek,remove-pull}
+\command{comparator()}{return null for the natural ordering}
 
+\subsection{HashMap}
+
+\begin{lstlisting}[language=Java]
+// quick
+Iterator iter = map.entrySet().iterator();
+while (iter.hasNext()) {
+    Map.Entry entry = (Map.Entry) iter.next();
+    Object key = entry.getKey();
+    Object val = entry.getValue();
+}
+//for (Map.Entry<String, Integer> entry : tempMap.entrySet())
+
+// slow
+Iterator iter = map.keySet().iterator();
+while (iter.hasNext()) {
+    Object key = iter.next();
+    Object val = map.get(key);
+}
+\end{lstlisting}
+\newpage
+
+\section{Collection}
+\tikzstyle{every node}=[anchor=west]
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.2,-0.5) and
+  two children at (0.2,-0.5) and (0.2,-1.0)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+  \node {Collection}
+    child { node {List}
+      child { node {LinkedList}}
+      child { node {ArrayList}}
+      child { node {Vector}
+          child { node{Stack}}
+      }
+    }
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child [missing] {}
+    child { node {Set}
+          child { node{HashSet}}
+          child { node{LinkedHashSet}}
+          child { node{SortedSet}
+            child { node{TreeSet}}
+          }
+    };
+\end{tikzpicture}
+
+\command{Collection}{iterator()}
+\command{List}{listIterator(),add()}
+\command{Vector->iterator()}{ConcurrentModificationException}
+\command{List-Set}{Repeatable-Nonrepeatable}
+\command{HashSet}{Based on hashCode() and equals()}
+\command{HashSet-TreeSet}{Hash quick, TreeSet use comparator-slower}
+\command{TreeSet}{ Use a comparable object as the constructor. }
+
+\section{Map}
+\tikzstyle{every node}=[anchor=west]
+\begin{tikzpicture}[%
+  grow via three points={one child at (0.2,-0.5) and
+  two children at (0.2,-0.5) and (0.2,-1.0)},
+  edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+  \node {Map}
+    child { node {HashTable TS}}
+    child { node {HashMap NTS}};
+    child { node {WeakHashMap}};
+\end{tikzpicture}
+
+\command{HashTable}{Based on type's hashCode() and equals()(Rewrite at same time.)}
+\command{HashMap}{Could contain Null key.}
+\command{HashSet-HashMap}{Object list add()-Key and value map put()}
+% \command{Collection}{iterator()}
+
+\section{Interface}
+
+\subsection{List}
+
+\subsection{Queue}
+
+\subsection{Cloneable}
+
+\subsection{RandomAccess}
+
+\subsection{Serializable}
 % Used at the very beginning of a document:
 % \verb!\documentclass{!\textit{class}\verb!}!.  Use
 % \verb!\begin{document}! to start contents and \verb!\end{document}! to
