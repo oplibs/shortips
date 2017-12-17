@@ -4,7 +4,7 @@ import cn.mzen.algotips.base.FileLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.List;
+import java.util.HashSet;
 
 /**
  * Created by itrek on 12/20/16.
@@ -22,10 +22,36 @@ public class Sol003 extends Solution{
     }
 
     public void processCase(String data) {
-        System.out.println("here!");
+        this.execute(data);
     }
 
-    private void execute(int[] nums, int target){
-        //private void execute(int[] nums, int target){
+    private Integer execute(String s){
+        if(s.length()<2){
+            return s.length();
+        }
+        // 初始化状态的设计尽量考虑统一设计，不要自己设计多种初始化状态，
+        // 比如curlen不能直接为1, start=0, cur=1。
+        Integer start=0;
+        Integer cur=0;
+        Integer curlen=0;
+        HashSet<Character> set = new HashSet<Character>();
+        while(cur<s.length()){
+            if(set.contains(s.charAt(cur))){
+                curlen=Math.max(curlen, cur-start);
+                while(start<=cur){
+                    if(s.charAt(start)==s.charAt(cur)){
+                        start++;
+                        break;
+                    }else{
+                        set.remove(s.charAt(start++));
+                    }
+                }
+                cur++;
+            }else{
+                set.add(s.charAt(cur++));
+            }
+        }
+        curlen=Math.max(curlen, cur-start);
+        return curlen;
     }
 }

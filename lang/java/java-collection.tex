@@ -33,11 +33,12 @@ Arrays.sort(fruits, Fruit.FNComparator);
 \begin{lstlisting}[language=Java]
 char data[] = {'a', 'b', 'c'};
 String str = new String(data);
+char[] charArray = str.toCharArray();
+String substr = str.substring(0,1);
 \end{lstlisting}
-\command{}{charAt(), codePointAt(), code}PointCount(begin, end)}
+\command{}{charAt(), codePointAt(), codePointCount(begin, end)}
 \command{}{compareTo(),compareToIgnoreCase(), equalsIgnoreCase()}
 \command{}{isEmpty(), length(), replace(oldchar,newchar), replace(target, replacement)}
-
 
 \section{Collection}
 \subsection{List}
@@ -114,6 +115,19 @@ while (iter.hasNext()) {
     Object val = map.get(key);
 }
 \end{lstlisting}
+
+\begin{tabular}{@{}ll@{}}
+    \hline
+    {HashTable}  & {TS, size should be 2*old+1}\\
+    \hline
+    {HashMap}    & \tabincell{l}{NTS(with linklist),size should be $2^n$.\\ Key null -> use containsKey(),not get().}\\
+    \hline
+    {HashTable-HashMap}    & \tabincell{l}{Hashtable extends Dictionary \\HashMap extends AbstractMap\\both implements Map}\\
+    {HashTable-HashMap}    & \tabincell{l}{Hashtable iterator and Enumeration\\HashMap iterator}\\
+    {HashTable-HashMap}    & {hashCode-Hash calculation}\\
+    \hline
+\end{tabular}
+
 \newpage
 
 \section{Collection}
