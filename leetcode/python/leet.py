@@ -22,12 +22,15 @@ class Solution(object):
             algo.run(line);
 
 if __name__!="main":
-    action = str.strip(raw_input('Please input the question number (Input q to quit): '))
+    action = str.strip(raw_input('Please input the question number (Suchas 001, Input q to quit): '))
     if action== 'q':
         print "quit"
     else:
         classname = 'Sol'+action
         filename = '../tests/leet'+action
-        algo = eval(classname)()
-        sol = Solution();
-        sol.runAllCases(filename, algo);
+        try:
+            algo = eval(classname)()
+            sol = Solution();
+            sol.runAllCases(filename, algo);
+        except Exception, e:
+            print e
