@@ -5,9 +5,11 @@ import cn.mzen.algotips.base.*;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
+
 // import java.io.StringReader;
 // import java.util.ArrayList;
 // import java.util.HashMap;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -34,7 +36,18 @@ public class Sol001 extends Solution{
         //this.execute(list, target);
     }
 
-    private void execute(int[] nums, int target){
-        //private void execute(int[] nums, int target){
+    private int[] execute(int[] nums, int target){
+        int[] result = new int[2];
+        HashMap<Integer, Integer> dataset = new HashMap<Integer, Integer>();
+        for(Integer nc=0;nc<nums.length;nc++){
+            Integer newkey = target-nums[nc];
+            if(dataset.containsKey(newkey)){
+                result[1]=nc;
+                result[0]=dataset.get(newkey);
+                return result;
+            }
+            dataset.put(nums[nc],nc);
+        }
+        return result;
     }
 }

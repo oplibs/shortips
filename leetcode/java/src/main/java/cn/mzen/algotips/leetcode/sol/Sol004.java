@@ -13,7 +13,7 @@ public class Sol004 extends Solution{
     private static Logger logger = LogManager.getLogger(Sol003.class.getName());
     private static String TAG = "Sol 004";
 
-    public Sol003(){
+    public Sol004(){
         super();
     }
 
@@ -22,9 +22,10 @@ public class Sol004 extends Solution{
     }
 
     public void processCase(String data) {
-        this.execute(data);
+        // this.execute(data);
     }
 
-    private void execute(String s){
+    private double execute(int[] nums1, int[] nums2){
+        return 0.0;
     }
 }
