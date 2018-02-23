@@ -45,6 +45,7 @@ jspm_packages
 *.out
 *.pdf
 *.gz
+*.toc
 
 # for python
 *.pyc
