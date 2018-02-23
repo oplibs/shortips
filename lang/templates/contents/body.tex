@@ -217,6 +217,10 @@ Definition of word.
 
 \section{Table}\index{Table}
 
+%****************************************************************************************
+%	1) Table with auto wrap text
+%****************************************************************************************
+
 \begin{table}[h]
 \centering
 \begin{tabular}{l l l}
@@ -230,6 +234,28 @@ Treatment 3 & 0.0009271 & 0.296 \\
 \end{tabular}
 \caption{Table caption}
 \end{table}
+
+%****************************************************************************************
+%	2) Table with auto wrap text
+%****************************************************************************************
+
+\begin{tabular}{|p{1cm}|p{3cm}|}
+  This text will be wrapped & Some more text \\
+\end{tabular}
+
+% \begin{table}[ht]
+  % \caption{test}
+  % \label{Tab:bookRWCal}
+  % \centering
+  % \begin{tabular}{lp{3cm}p{3cm}p{4cm}}
+  % \toprule
+  % \textbf{著作类别} &\textbf{A级出版社} &\textbf{B级出版社}&\textbf{C级出版社}\\
+  % \midrule
+  % 学术专著         &第一作者3分/万字，其他作者 2分/万字	&第一作者3分/万字，其他作者 2分/万字	&第一作者3分/万字，其他作者 2分/万字\\
+  % \bottomrule
+  % \end{tabular}
+% \end{table}
+
 
 %------------------------------------------------
 
@@ -264,4 +290,5 @@ Treatment 3 & 0.0009271 & 0.296 \\
 \printindex
 
 %----------------------------------------------------------------------------------------
+
 
