@@ -17,7 +17,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
 
-// defaultTasks 'listalltasks'
+// defaultTasks 'leet'
 
 // task listalltasks << {
     // print "abcd"
@@ -38,5 +38,13 @@ task leet001(type: JavaExec) {
         println args
     }
     main = 'cn.mzen.algotips.Main'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task Leet010(type: JavaExec) {
+    String pars =  projectDir
+    String file = pars + "/tests/leet001"
+    args=[file]
+    main = 'cn.mzen.algotips.leetcode.Sol010'
     classpath = sourceSets.main.runtimeClasspath
 }
