@@ -16,6 +16,7 @@ public class FileLoader{
     public FileLoader(){
     }
 
+    @Override
     protected void finalize( )
     {
         if(this.br!=null){
@@ -36,6 +37,20 @@ public class FileLoader{
         }
     }
 
+    private String readLine(){
+        String readdata;
+        try {
+            readdata=this.br.readLine();
+            if(!(readdata!=null && readdata.length()>0)){
+                return null;
+            }
+            return readdata;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public boolean loadFile(String filename){
         try {
             this.fr = new FileReader(filename);
@@ -45,22 +60,8 @@ public class FileLoader{
             e.printStackTrace();
             return false;
         }
+        this.data = this.readLine();
         return true;
-    }
-
-    public String loadCase(){
-        String line=null;
-        try {
-            line=this.br.readLine();
-            if(line!=null && line.length()>0){
-                return line;
-            }else {
-                return null;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     public static List getIntegerArray(String str){
@@ -73,5 +74,19 @@ public class FileLoader{
         }
         return intarray;
 
+    }
+
+    private String data=null;
+
+    public boolean loadData() {
+        this.data=null;
+        return true;
+    }
+    public boolean hasNext() {
+       return this.data!=null;
+    }
+    public ListNode next(){
+        this.data=readLine();
+        return null;
     }
 }
