@@ -1,6 +1,6 @@
-package cn.mzen.algotips.leetcode.sol;
+package cn.mzen.algotips.leetcode;
 
-import cn.mzen.algotips.base.FileLoader;
+import cn.mzen.algotips.leetcode.base.FileLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

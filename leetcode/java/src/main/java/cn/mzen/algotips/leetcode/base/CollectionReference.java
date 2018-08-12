@@ -1,4 +1,4 @@
-package cn.mzen.algotips.base;
+package cn.mzen.algotips.leetcode.base;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

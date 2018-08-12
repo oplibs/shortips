@@ -1,19 +1,16 @@
-package cn.mzen.algotips.leetcode.sol;
+package cn.mzen.algotips.leetcode;
 
-import cn.mzen.algotips.base.FileLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.HashSet;
 
 /**
  * Created by itrek on 12/20/16.
  */
-public class Sol004 extends Solution{
+public class Sol005 extends Solution{
     private static Logger logger = LogManager.getLogger(Sol003.class.getName());
-    private static String TAG = "Sol 004";
+    private static String TAG = "Sol 005";
 
-    public Sol004(){
+    public Sol005(){
         super();
     }
 
@@ -22,10 +19,10 @@ public class Sol004 extends Solution{
     }
 
     public void processCase(String data) {
-        // this.execute(data);
+        this.execute(data);
     }
 
-    private double execute(int[] nums1, int[] nums2){
-        return 0.0;
+    private String execute(String s){
+        return "";
     }
 }

@@ -1,4 +1,4 @@
-package cn.mzen.algotips.base;
+package cn.mzen.algotips.leetcode.base;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

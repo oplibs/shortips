@@ -1,11 +1,8 @@
-package cn.mzen.algotips.leetcode.sol;
+package cn.mzen.algotips.leetcode;
 
-import cn.mzen.algotips.base.CollectionReference;
-import cn.mzen.algotips.base.FileLoader;
+import cn.mzen.algotips.leetcode.base.CollectionReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.List;
 
 /**
  * Created by itrek on 29/08/2017.

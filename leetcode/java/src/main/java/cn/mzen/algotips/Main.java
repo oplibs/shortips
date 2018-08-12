@@ -1,6 +1,6 @@
 package cn.mzen.algotips;
 
-import cn.mzen.algotips.leetcode.LeetCode;
+import cn.mzen.algotips.leetcode.base.LeetCode;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
