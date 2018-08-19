@@ -54,6 +54,17 @@ temp.py
 
 # for java
 .gradle
+gradle
+gradlew
+gradlew.bat
 .idea
 build
 out
+log
+logs
+.project
+.settings
+out
+.classpath
+*.class
+bin
