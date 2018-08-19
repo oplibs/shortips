@@ -24,12 +24,6 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     compile 'com.google.guava:guava:23.0'
 
-    // https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.io
-    compile group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
-
-    // https://mvnrepository.com/artifact/io.netty/netty-all
-    compile group: 'io.netty', name: 'netty-all', version: '4.1.28.Final'
-
     compile project(':common')
 
     // Use JUnit test framework
@@ -72,11 +66,3 @@ task runLeet(type: JavaExec) {
     main = 'App'
     classpath = sourceSets.main.runtimeClasspath
 }
-
-// Run Echo Client for Netty
-// task runEC(type: JavaExec) {
-    // print("Run Echo Client For Netty")
-    // main = 'cn.mzen.deepnetty.echo.EchoClient'
-    // classpath = sourceSets.main.runtimeClasspath
-// }
-// }}} itrek: begin for Netty demo

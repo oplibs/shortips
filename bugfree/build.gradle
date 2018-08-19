@@ -5,47 +5,9 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * user guide available at https://docs.gradle.org/4.8/userguide/tutorial_java_projects.html
  */
-
 plugins {
     // Apply the java plugin to add support for Java
     id 'java'
-
-    // Apply the application plugin to add support for building an application
-    id 'application'
-}
-
-// Define the main class for the application
-mainClassName = 'App'
-
-dependencies {
-    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.0'
-
-    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
-    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
-
-    // This dependency is found on compile classpath of this component and consumers.
-    compile 'com.google.guava:guava:23.0'
-
-    // https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.io
-    compile group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
-
-    // https://mvnrepository.com/artifact/io.netty/netty-all
-    compile group: 'io.netty', name: 'netty-all', version: '4.1.28.Final'
-
-    // Use JUnit test framework
-    testCompile 'junit:junit:4.12'
-}
-
-
-jar {
-    manifest {
-        attributes "Main-Class": "App"
-    }
-
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
 }
 
 // In this section you declare where to find the dependencies of your project
@@ -55,63 +17,35 @@ repositories {
     jcenter()
 }
 
-// Same effect as above jar
-task packJar(type: Jar) {
-    manifest {
-        attributes 'Main-Class': 'com.baeldung.fatjar.Application'
+allprojects {
+    repositories {
+        jcenter()
     }
-    baseName = 'deepj'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
+     dependencies {
+     }
 }
 
-// Tasks for run
-task runBasic(type: JavaExec) {
-    main = 'App'
-    classpath = sourceSets.main.runtimeClasspath
-}
+dependencies {
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.0'
 
-task runThread(type: JavaExec) {
-    main = 'ThreadApp'
-    classpath = sourceSets.main.runtimeClasspath
-}
+    // This dependency is found on compile classpath of this component and consumers.
+    compile 'com.google.guava:guava:23.0'
 
-// itrek: begin for thread demo {{{
+    // https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.io
+    compile group: 'org.apache.directory.studio', name: 'org.apache.commons.io', version: '2.4'
 
-// Run SimpleDeadLock
-task runSDL(type:JavaExec){
-    print("Run Simple Dead Lock");
-    main = 'cn.mzen.deepj.threads.deadlock.case1.SimpleDeadLock'
-    classpath = sourceSets.main.runtimeClasspath
+    testCompile 'junit:junit:4.12'
 }
+/*
+jar {
+    manifest {
+        attributes "Main-Class": "App"
+    }
 
-// Run join to sync
-task runJoinSync(type:JavaExec){
-    print("Run Join Sync case");
-    main = 'cn.mzen.deepj.threads.data.case1.AccountingSync'
-    classpath = sourceSets.main.runtimeClasspath
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
+*/
 
-// Run SimpleExecutorPool
-task runSEP(type:JavaExec){
-    print("Run Simple ExecutorPool sample");
-    main = 'cn.mzen.deepj.threads.base.SimpleExecutorPool'
-    classpath = sourceSets.main.runtimeClasspath
-}
-// }}} itrek: begin for thread demo
-
-// itrek: begin for Netty demo {{{
-// Run Echo Server for Netty
-task runES(type: JavaExec) {
-    print("Run Echo Server For Netty")
-    main = 'cn.mzen.deepnetty.echo.EchoServer'
-    classpath = sourceSets.main.runtimeClasspath
-}
-
-// Run Echo Client for Netty
-task runEC(type: JavaExec) {
-    print("Run Echo Client For Netty")
-    main = 'cn.mzen.deepnetty.echo.EchoClient'
-    classpath = sourceSets.main.runtimeClasspath
-}
-// }}} itrek: begin for Netty demo
