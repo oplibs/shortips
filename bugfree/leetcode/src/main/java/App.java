@@ -14,15 +14,22 @@ public class App {
     }
 
     public static void main(String[] args){
-        logger.info("app");
-        ListNode node=new ListNode(1);
-        logger.info(node);
-        App.testConcatenatingStrings();
+        if(args.length<2) {
+            logger.error("Need 2 parameter：");
+            logger.error("1> is the working directory, which have all test cases file.");
+            logger.error("2> is test cases number, such as 001.");
+            return;
+        }else{
+            logger.info(args.length);
+            CaseLoader loader = new CaseLoader();
+        }
+        // String casePath = args[0];
+        // logger.info(casePath);
+        // logger.info(args[1]);
     }
 
     @Benchmark
     public static void testConcatenatingStrings() {
-
         String x = "", y = "", z = "";
 
         for (int i = 0; i < 100; i++) {

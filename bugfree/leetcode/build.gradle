@@ -68,4 +68,10 @@ task packJar(type: Jar) {
 task runLeet(type: JavaExec) {
     main = 'App'
     classpath = sourceSets.main.runtimeClasspath
+    // print classpath
+    // System.setProperty( "user.dir", project.projectDir.toString() )
+    // println System.getProperty("user.dir")
+    // println project.getProperty('case')
+    def casenum=project.properties['case'] ?: "001"
+    args = [project.projectDir.toString(), casenum]
 }
