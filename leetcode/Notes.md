@@ -154,9 +154,14 @@
 501. binary search tree中序遍历其实就是从小到大排序遍历
 502. [ ]  ????
 503. [X] 用stack构建一个< >排序的方法......
+583. [X] EditDistance DP
 
 == TODO ==
 === cpp ===
+* union find
+* bfs
+* dfs
+* [X] sort
 
 * math
 '''
