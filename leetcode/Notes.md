@@ -163,7 +163,7 @@ def removeDuplicates(self, nums: List[int]) -> int:
 152 [ ] dp, *******************注意状态转换别漏了
 153 [ ] ] : 二分查找，注意边界条件
 155 [ ] 设计设计设计设计
-156 [ ] 放弃
+156 [-] 放弃
 159 [ ] twopointer，hashmap存位置
 161 [X] ] : 踏实的实现，cpp利用递归实现参数交换复制（switch）
 162 [ ] 这个条件很tricky nums[-1] = nums[n] = -∞
@@ -185,11 +185,56 @@ def removeDuplicates(self, nums: List[int]) -> int:
 204 [X] easy 计数质数
 205 [X] easy 双向 同构字符串
 206 [X] 翻转链表=========递归的丝路
-209 [X] ] ***注意终止条件。
-230 [ ] ] ***注意终止条件。
-236 [ ] 叉树的最近公共祖先  注意自己是自己的祖先。
+209 [X] ***注意终止条件。
+229 [X] 多数元素 II ******注意边界条件
+230 [X] 二叉搜索树中第K小的元素******注意递归如何有效终止。
+236 [*] 二叉树的最近公共祖先  ******** 看看递归的思路
+237 [-] 删除链表中的节点
 238 [ ] 单回忆一下
+239 [ ] 滑动窗口最大值：
+’‘’
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        if(k==1){
+            return nums;
+        }
+        vector<int> results(nums.size()-k+1);
+        //queue存的可是位置
+        deque<int> maxqueue;
+        //1. 先初始化，少放一个，这样在正式循环中可以补充数字。[0,k-1)
+        for(int i=0; i < k-1; i++){
+            while(maxqueue.size()>0 && nums[maxqueue.back()]<nums[i]){
+                maxqueue.pop_back();
+            }
+            maxqueue.push_back(i);
+            //printf("pos size top: %d %d %d %d\n", i, maxqueue.size(), maxqueue.front(),nums[maxqueue.front()]);
+        }
+        //2. 正式循环中可以补充数字.
+        //   字符串循环区间是：[k-1, n)
+        //   写入位置是(i-k+1,可以从初始点推导出来)
+        for(int i=k-1; i < nums.size(); i++){
+            while (maxqueue.size()>0 && nums[i]>nums[maxqueue.back()]){
+                maxqueue.pop_back();
+            }
+            maxqueue.push_back(i);
+            //printf("pos size top: %d %d %d %d\n", i, maxqueue.size(), maxqueue.front(),nums[maxqueue.front()]);
+            while(maxqueue.front()<=(i-k)){
+                maxqueue.pop_front();
+            }
+            //printf("set: %d %d %d\n", i-k, maxqueue.front(),nums[maxqueue.front()]);
+            results[i-k+1]=nums[maxqueue.front()];
+        }
+
+        return results;
+    }
+};
+‘’‘
 240 [ ] 维有序矩阵的查找…………
+242 [X] 有效的字母异位词： *********** hash与sort可以有效结合
+243 [X] 最短单词距离，一遍扫描
+246 [X] 中心对称数： size_t 不是适合做双指针比较，因为非负的原因
+247 [X] 中心对称数 II：容易一些。
 279 [X] dp, *******************注意状态转换别漏了
 298 [X] ======注意cache
 299 [X] ======简单记忆一下
@@ -213,6 +258,9 @@ def removeDuplicates(self, nums: List[int]) -> int:
 
 == TODO ==
 === cpp ===
+#### tips ####
+* size_t 不是适合做双指针比较，因为非负的原因
+
 * union find
 * bfs
 * dfs
