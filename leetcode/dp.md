@@ -46,6 +46,7 @@ https://leetcode.cn/problems/longest-common-subsequence/solution/zui-chang-gong-
 ([#q22](#q22))
 括号的排列组合：
 "("+a+")"+b : a,b均为合法的组合， a+b的有效括号数是n-1
+利用dp模拟括号归纳法，达成回溯的作用。关键在于思路。
 * ############################## 如此设计的原因起源于是括号必然是成对出现的。
 类似的题目还有 ([#q95](#q95))([#q96](#q96))
 
@@ -191,7 +192,6 @@ https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/solution/tan-xin
 #### 状态方程 ####
 状态方程：
 #### 归纳法 - 类似于递归（分治）类问题的思路 ####
-22 [X] ====利用dp模拟括号归纳法，达成回溯的作用。关键在于思路。
 91 [X] ====比较好写
 96 [X] ====不同二叉树的数量，排列组合与dp的深度结合
 ([#q279](#q279))
