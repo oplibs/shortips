@@ -381,7 +381,12 @@ public:
 #### tips
 * size_t 不是适合做双指针比较，因为非负的原因
 * [ ] 字符串排序 sort(t.begin(),t.end());
-
+'''
+static bool cmp(pair<int, int>& m, pair<int, int>& n) {
+  return m.second > n.second;
+}
+priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(&cmp)> q(cmp);
+'''
 
 * union find
 * bfs
@@ -426,7 +431,7 @@ if (vis[i] || (i > 0 && nums[i] == nums[i - 1]
  * 选择当前数字
  */
 
-* 全排列
+* 全排列-每个元素必须出现，只是顺序不同
 '''
 // No need to using pos
 void backtrack(candidates, results, item, int len){
@@ -437,7 +442,7 @@ void backtrack(candidates, results, item, int len){
   } else if (failed){
     return;
   }
-  // loop start with 0, helped by visited.
+  // 因为是排列，通过visited去重，避免重复出现，而且每次都从数组起始元素进行组合
   for(int i=0; i < len; i++){
     if(visited(candidate[i])){
       continue;
@@ -451,24 +456,25 @@ void backtrack(candidates, results, item, int len){
   }
 }
 '''
-* 组合
+* 组合: 元素可选可不选，顺序不重要
 '''
-写法一：
 void backtrack(candidates, results, item, int pos, int len){
   //结果剪枝
-  if( xxx ){
+  if( cmp(pos, len) ){
     results.push_back(item);
     return;
   } else if (failed){
     return;
   }
 
+  //不加某个元素
   backtrack(candidates, results, item, pos+1, len);
+  //加某个元素
   item.push_back(candidates[pos]);
   backtrack(candidates, results, item, pos+1, len);
   item.pop_back(candidates[pos]);
 }
-写法二：组合，每个元素不限制选择次数
+* 组合出目标值，每个元素不限制选择次数，也可以不选，选取次数一样的时候为重复
 void backtrack(candidates, results, item, int pos, int len){
   //结果剪枝
   if( xxx ){
@@ -483,13 +489,14 @@ void backtrack(candidates, results, item, int pos, int len){
   for(int i = pos; i < len; i++){
     item.push_back(candidates[pos]);
     // 错误:backtrack(candidates, results, item, pos+1, len);
-    // 正确如下，从i开始
+    // 正确如下，从i开始,这里的i从pos开始表示对应的的元素可以选多次，每次回溯都是通过i++，这样就可以遍历某个值选从0到上限的各种情况从i开始
     backtrack(candidates, results, item, i, len);
     item.pop_back(candidates[pos]);
   }
 }
 
-* 某元素可以重复选取的组合
+/****************************  maybe wrong <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<</
+<  某元素可以重复选取的组合: 顺序重要 ???????????
 '''
 void backtrack(candidates, results, item, int len){
   //结果剪枝
@@ -499,7 +506,7 @@ void backtrack(candidates, results, item, int len){
   } else if (failed){
     return;
   }
-  //这个循环保障从0开始，保障了某个元素可以重复选取
+  //这个循环保障从0开始，似乎就是排列了
   for(int i=0; i < len; i++){
     if(target is failed){
       continue;
@@ -510,6 +517,7 @@ void backtrack(candidates, results, item, int len){
     item.pop_back(candidates[i]);
   }
 }
+/>>>>>>>>>>>>>>>>>>>>>>>>>>>>> maybe wrong ***********************************/
 ### 递归 ###
 ([#q递归链表](#q递归链表))
 
