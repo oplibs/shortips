@@ -21,7 +21,7 @@ o: others
 3 [X-#] 无重复字符的最长子串: DP的转换方程, 按照长度更新
 4 [*] 寻找两个正序数组的中位数
 # q5
-5 [X] 长回文子串:回文相关 方法一好些，dp解法需要写一下。
+5 [X] 最长回文子串:👍👍👍👍👍👍👍👍👍👍dp遍历顺序是初始字符串长度，也就是初始化条件是长度为1的子字符串，然后从长度为2的字符串判断走起（遍历到长度为len）。
 6 [X] Z字形变换: Done用公式
 7 [X] 整数反转,负数和corner case.
 8 [ ]  字符串转换整数 (atoi)
@@ -36,7 +36,7 @@ o: others
 17 [X] 电话号码的字母组合
 18 [*] 四数之和
 19 [X] 除链表的倒数第 N 个结点:
-20 [*] 有效的括号.
+20 [-] 有效的括号.
 21 [X] 合并两个有序链表
 # q22
 22 [*] 括号生成 dp
@@ -98,7 +98,7 @@ o: others
 69 [ ] X的平方根
 70 [X] 爬楼梯
 71 [ ] 简化路径
-72 [+] 编辑距离
+72 [X] 编辑距离
 73 [X] 矩阵置零
 # q74
 74 [R] 检索二维矩阵
@@ -176,7 +176,7 @@ def removeDuplicates(self, nums: List[int]) -> int:
 126 [*] 单词接龙 II 图更好
 127 [*] 单词接龙
 # q128
-128 [X] 最长连续序列 : 判断区间存在的方法比较好，先看看有没有前驱来确定是不是第一个元素，然后再去判断连续性，👍👍👍👍👍👍👍👍👍👍
+128 [X] 最长连续序列 : 👍👍👍👍👍👍👍👍👍👍判断区间存在的方法比较好，先看看有没有前驱来确定是不是第一个元素，然后再去判断连续性，
 129 [-] easy 求根节点到叶节点数字之和
 130 [*] 被围绕的区域 ===dfs+bfs的标准写法
 # q131
@@ -217,6 +217,7 @@ while left <= right:
 165 [ ] cpp的2 pointers实现split扫描
 166
 167 [-] EASY
+169 [-] 多数元素 EASY 多数元素这个点可以考虑排序后，排在[n/2]的位置，这个点比较重要，👍👍👍👍👍👍👍👍👍👍有空看看Boyer-Moore 投票算法
 171 [-] Excel 表列序号
 172 [ ] ======== 定义sort函数:
 173 [ ] 叉搜索树迭代器
@@ -320,6 +321,7 @@ public:
 ==== 3?? ====
 315 [*] 计算右侧小于当前元素的个数 ([#q315](#q315))
 337 [*] 打家劫舍III
+347 [X] 前K个高频元素
 365 [X] ************* 再仔细理解一下搜索 *********************
 394 [X] =================进出栈的算法流程再熟悉一下。
 395 [*] 至少有 K 个重复字符的最长子串:=================dfs+分治（其实也是递归）
@@ -329,7 +331,7 @@ public:
 404 [-] 左叶子之和 看看递归的写法
 409 [-] 最长回文串
 413 [X] 等差数列划分 dp的题意似乎有些歧义
-
+437 [*] 路径总和 III 👍👍👍👍👍👍👍👍👍👍有没有root和前缀和的关系,还有递归的设计也很棒
 461 [-] 汉明距离
 462 [ ] 最少移动次数使数组元素相等 II
 463 [-] 岛屿的周长
@@ -359,28 +361,32 @@ public:
 501 [ ] binary search tree中序遍历其实就是从小到大排序遍历
 502 [ ]  ????
 503 [X] 用stack构建一个< >排序的方法......
+560 [X] 和为 K 的子数组 :注意这个优化策略，随着求前缀和直接判断结果，因为子区间的和意味着在某个位置i前面所有的元素已经决定了当前的解，所以随着前缀和的计算，已经可以统计已经满足需求的值了。
+# q581
+581 [X] 最短无序连续子数组, https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/solution/zui-duan-wu-xu-lian-xu-zi-shu-zu-by-leet-yhlf/ 方法二没看懂
 # q583
+583 [X] 两个字符串的删除操作 dp
+
+=== 60? ===
+617 [-] 合并二叉树
 
 # q1143
 1143 [X]最长公共子串
 
-[X] EditDistance DP
 
-== TODO ==
-=== cpp ===
-#### tips ####
+## todo
+### cpp
+#### tips
 * size_t 不是适合做双指针比较，因为非负的原因
 * [ ] 字符串排序 sort(t.begin(),t.end());
 
-* 单调栈 496
-* 常见写法 128 [X] 最长连续序列 : 判断区间存在的方法比较好，先看看有没有前驱来确定是不是第一个元素，然后再去判断连续性，👍👍👍👍👍👍👍👍👍👍
 
 * union find
 * bfs
 * dfs
-* [X] sort
+* sort
 
-* [X] math
+* math
 '''
 #include <algorithm>
 std::max
@@ -388,13 +394,17 @@ std::max
 ==== cpp ====
 * [X] 如何定制sort函数 sort(vector<?>.begin, vector<?>.end);
 
-## 算法复习要点 ##
+### 算法和实现方式
+* 常见写法 128 [X] 最长连续序列 : 判断区间存在的方法比较好，先看看有没有前驱来确定是不是第一个元素，然后再去判断连续性，👍👍👍👍👍👍👍👍👍👍
+* [ ] priorty_queue的用法 347
+* 单调栈 496
 
 ### 基本功 ###
 字符串和数组相同元素处理: ([#q151](#q151))
+* merge sort
 
-排列组合
-question list:
+### 排列组合
+* question list:
 https://leetcode.cn/problems/permutations/solution/hui-su-suan-fa-python-dai-ma-java-dai-ma-by-liweiw/
 if (vis[i] || (i > 0 && nums[i] == nums[i - 1] && !vis[i - 1])) {
     continue;
@@ -409,10 +419,95 @@ if (vis[i] || (i > 0 && nums[i] == nums[i - 1]
 /* vis[i]：当前数字是否出现过
  * 如果当前数字与前一个数字相同（nums[i] == nums[i - 1]），
  * 并且前一个数字还没有出现的话（vis[i - 1] == false），
- * 那么就不能选择当前数字（continue），
+ * [ ] 那么就不能选择当前数字（continue），
  * 如果前面的数字已经出现过（vis[i] == true），则可以
  * 选择当前数字
  */
+
+* 全排列
+'''
+// No need to using pos
+void backtrack(candidates, results, item, int len){
+  //结果剪枝
+  if( xxx ){
+    results.push_back(item);
+    return;
+  } else if (failed){
+    return;
+  }
+  // loop start with 0, helped by visited.
+  for(int i=0; i < len; i++){
+    if(visited(candidate[i])){
+      continue;
+    }
+
+    item.push_back(candidates[i]);
+    visited[i]=true;
+    backtrack(candidates, results, item, len);
+    visited[i]=false;
+    item.pop_back(candidates[i]);
+  }
+}
+'''
+* 组合
+'''
+写法一：
+void backtrack(candidates, results, item, int pos, int len){
+  //结果剪枝
+  if( xxx ){
+    results.push_back(item);
+    return;
+  } else if (failed){
+    return;
+  }
+
+  backtrack(candidates, results, item, pos+1, len);
+  item.push_back(candidates[pos]);
+  backtrack(candidates, results, item, pos+1, len);
+  item.pop_back(candidates[pos]);
+}
+写法二：组合，每个元素不限制选择次数
+void backtrack(candidates, results, item, int pos, int len){
+  //结果剪枝
+  if( xxx ){
+    results.push_back(item);
+    return;
+  } else if (failed){
+    return;
+  }
+
+  //这个循环保障了写法一里面的不增加当前元素的选项生效,不用单独再写一下不加这个当前元素的组合求解。
+  // 重点是pos开始
+  for(int i = pos; i < len; i++){
+    item.push_back(candidates[pos]);
+    // 错误:backtrack(candidates, results, item, pos+1, len);
+    // 正确如下，从i开始
+    backtrack(candidates, results, item, i, len);
+    item.pop_back(candidates[pos]);
+  }
+}
+
+* 某元素可以重复选取的组合
+'''
+void backtrack(candidates, results, item, int len){
+  //结果剪枝
+  if( xxx ){
+    results.push_back(item);
+    return;
+  } else if (failed){
+    return;
+  }
+  //这个循环保障从0开始，保障了某个元素可以重复选取
+  for(int i=0; i < len; i++){
+    if(target is failed){
+      continue;
+    }
+
+    item.push_back(candidates[i]);
+    backtrack(candidates, results, item, len);
+    item.pop_back(candidates[i]);
+  }
+}
 ### 递归 ###
 ([#q递归链表](#q递归链表))
 
@@ -470,7 +565,6 @@ debug:
 ‘’‘
 那我先在excel上面登机一a
 public class MergeSort {
-
     private int[] temp;
 
     public void sort(int[] nums) {
@@ -525,8 +619,19 @@ https://leetcode.cn/problems/count-of-range-sum/solution/by-lfool-pkli/
 数组、字符串去掉某些元素的最小（大）值：检测到下降就去除掉前一个元素
 
 
+## 套题
+### 递归
+101 对称二叉树
+
+### 路径和
+112 路径总和 easy
+113 路径总和 II easy
+437 路径总和 III 👍👍👍👍👍👍👍👍👍👍有没有root和前缀和的关系
+666 路径总和 IV
+
 跟进
 4
 10
 215
+581 [X] 最短无序连续子数组, https://leetcode.cn/problems/shortest-unsorted-continuous-subarray/solution/zui-duan-wu-xu-lian-xu-zi-shu-zu-by-leet-yhlf/ 方法二没看懂
 
