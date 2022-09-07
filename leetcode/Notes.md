@@ -16,7 +16,7 @@ o: others
 ===med===
 ### 1-100 ###
 1 [-] two sum: easy
-2 [-] 两数相加: easy
+2 [-] 两数相加: easy，对于多个链表操作的场景，可以考虑多用？：在while循环中简化写法
 # q3
 3 [X-#] 无重复字符的最长子串: DP的转换方程, 按照长度更新
 4 [*] 寻找两个正序数组的中位数
@@ -381,17 +381,6 @@ public:
 
 
 ## todo
-### cpp
-#### tips
-* size_t 不是适合做双指针比较，因为非负的原因
-* [ ] 字符串排序 sort(t.begin(),t.end());
-'''
-static bool cmp(pair<int, int>& m, pair<int, int>& n) {
-  return m.second > n.second;
-}
-priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(&cmp)> q(cmp);
-'''
-
 * union find
 * bfs
 * dfs
