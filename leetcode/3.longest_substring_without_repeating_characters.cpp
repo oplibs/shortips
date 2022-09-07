@@ -6,6 +6,7 @@ public:
       if(s.length()<2){
         return s.length();
       }
+      //注意这里的起始状态，从-1、0开始
       int start = -1;
       int end = 0;
       int ret = 1;
